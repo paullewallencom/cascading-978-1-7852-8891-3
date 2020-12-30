@@ -1,0 +1,9 @@
+digraph G {
+  1 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/ch8out1"];
+  2 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/ch8out3"];
+  3 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/ch8data"];
+  4 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/ch8out2"];
+  1 -> 2 [label = "flowCount"];
+  3 -> 1 [label = "flowNE"];
+  1 -> 4 [label = "flowREL"];
+}

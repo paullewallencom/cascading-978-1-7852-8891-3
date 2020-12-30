@@ -1,0 +1,9 @@
+digraph G {
+  1 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/intout1"];
+  2 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/intout3"];
+  3 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/intdata"];
+  4 [label = "hdfs://quickstart.cloudera:8020/user/cloudera/intout2"];
+  1 -> 2 [label = "flowCount"];
+  3 -> 1 [label = "flowNE"];
+  1 -> 4 [label = "flowREL"];
+}

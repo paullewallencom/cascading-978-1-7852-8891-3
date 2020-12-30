@@ -1,0 +1,4 @@
+!/bin/bash
+. setenv.sh
+java -cp lib/learning_cascading.jar com.ai.learning.jobs.$1 $2 $3
+

@@ -1,0 +1,37 @@
+BAAA.pdf	0	Mario Jones	person
+BAAA.pdf	1	Mario Jones	person
+BAAA.pdf	1	John Smith	person
+BAAA.pdf	2	John Smith	person
+BAAA.pdf	2	Mario Jones	person
+BCI.pdf	2	Joan Brown	person
+NEWS.pdf	4	John Smith	person
+NEWS.pdf	4	Joan Brown	person
+NEWS2.doc	0	Steven Bergen	person
+NEWS3.txt	0	Michael Evans	person
+BAAA.pdf	2	Aluminum	chemical
+BAAA.pdf	2	Argon	chemical
+BCI.pdf	2	gold	chemical
+BCI.pdf	2	silver	chemical
+NEWS.pdf	3	zinc	chemical
+NEWS.pdf	3	sodium	chemical
+NEWS.pdf	3	silver	chemical
+NEWS.pdf	3	arsenic	chemical
+NEWS.pdf	4	gold	chemical
+NEWS2.doc	0	oxygen	chemical
+NEWS2.doc	1	carbon	chemical
+NEWS2.doc	1	oxygen	chemical
+NEWS3.txt	1	carbon	chemical
+BAAA.pdf	0	BAAA Company	organization
+BAAA.pdf	0	ACME Company	organization
+BAAA.pdf	1	Summercorp Inc He	organization
+BAAA.pdf	2	Summercorp Inc Mario	organization
+BCI.pdf	0	Brown Chemical Industries	organization
+BCI.pdf	1	Eastern Province	organization
+BCI.pdf	2	Chemical Industries	organization
+NEWS.pdf	0	EPA	organization
+NEWS.pdf	1	GOP	organization
+NEWS.pdf	2	Chemical Industry	organization
+NEWS2.doc	0	Chemical Business Technology	organization
+NEWS2.doc	0	Chemical Industry	organization
+NEWS3.txt	0	House	organization
+NEWS3.txt	0	Environmental Protection Agency's	organization

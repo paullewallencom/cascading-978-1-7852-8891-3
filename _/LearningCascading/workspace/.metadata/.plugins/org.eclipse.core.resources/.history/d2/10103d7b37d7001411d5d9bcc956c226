@@ -1,0 +1,9 @@
+digraph G {
+  1 [label = "file:/home/cloudera/AnalyticsInside/LearningCascading/workspace/LearningCascading/output/IntegrationTestNames.txt"];
+  2 [label = "file:/home/cloudera/AnalyticsInside/LearningCascading/workspace/LearningCascading/output/IntegrationTestCounts.txt"];
+  3 [label = "file:/home/cloudera/AnalyticsInside/LearningCascading/workspace/LearningCascading/data/IntegrationTest.txt"];
+  4 [label = "file:/home/cloudera/AnalyticsInside/LearningCascading/workspace/LearningCascading/output/IntegrationTestRel.txt"];
+  1 -> 2 [label = "flowCount"];
+  3 -> 1 [label = "flowNE"];
+  1 -> 4 [label = "flowREL"];
+}

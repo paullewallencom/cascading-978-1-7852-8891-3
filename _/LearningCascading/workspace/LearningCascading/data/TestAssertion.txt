@@ -1,0 +1,4 @@
+name,address,phone
+mike,123 e 4th st,123-456-7890
+victoria,987 w east ave,901-234-5678
+nobody,,

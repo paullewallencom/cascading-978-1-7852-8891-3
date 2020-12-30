@@ -1,0 +1,7 @@
+store,product,sold,returned
+StoreA,Product1,10,2
+StoreB,Product1,20,5
+StoreA,Product2,100,20
+StoreB,Product2,50,1
+StoreA,Product3,20,10
+StoreB,Product3,10,3

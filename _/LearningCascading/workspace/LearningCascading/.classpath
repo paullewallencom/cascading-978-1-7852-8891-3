@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang-2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/guava-14.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jgrapht-jdk1.6-0.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jwnl-1.3.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/opennlp-maxent-3.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/opennlp-tools-1.5.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/riffle-0.1-dev.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.7.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-simple-1.7.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/tagsoup-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/cascading-core-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/cascading-hadoop2-mr1-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/cascading-local-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/cascading-xml-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-configuration-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-hdfs.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core-0.20.205.0.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/cascading-core-2.6.1-tests.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

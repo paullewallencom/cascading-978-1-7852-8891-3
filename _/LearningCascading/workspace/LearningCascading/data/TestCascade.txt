@@ -1,0 +1,3 @@
+Document_name		Document_text
+Test1.txt	This is a sample text. It can have many sentences.
+Text2.txt	This text can have ambiguous sentences, including names like Mr. Smith.

@@ -1,0 +1,346 @@
+/* Copyright (c) 2015, Analytics Inside LLC. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   - Neither the name of Analytics Inside LLC or the names of its
+ *     products or trademarks,  may be used to endorse or promote products 
+ *     derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */ 
+
+package com.ai.learning;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import opennlp.tools.namefind.NameFinderME;
+import opennlp.tools.namefind.TokenNameFinder;
+import opennlp.tools.namefind.TokenNameFinderModel;
+import opennlp.tools.util.Span;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+
+/**
+ * Utilities contains a set of general methods for file access (HDFS and standard),
+ * data loading, and data lookup.
+ * These Utilities also contain a set on NLP functions for sentence processing, tokenization
+ * and named entity extraction
+ *
+ */
+public class Utilities 
+{
+
+	static HashSet<String> compounds = new HashSet<String>();
+	static HashSet<String> elements  = new HashSet<String>();
+	static HashSet<String> abbrevs   = new HashSet<String>();
+	static Map<String, String> abbreviations = null;
+	static {
+		loadTestData();		
+	}
+	/**
+	 * Return an InputStream from a file name
+	 * @param fileName - name of file
+	 * @return InputStream
+	 * @throws IOException
+	 */
+	public static InputStream getInputStream(String fileName) throws IOException
+	{
+		if (fileName.startsWith("hdfs:"))
+		{
+			Path pt=new Path(fileName);
+			FileSystem fs = FileSystem.get(new Configuration());
+			return fs.open(pt);
+		}
+		return new FileInputStream(fileName);		
+	}
+	/**
+	 * Get an InputStreamReader for a file. If it is prefixed with "hdfs:", it will be located in HDFS.
+	 * @param fileName - full path name of file (including file system prefix)
+	 * @return InputStreamReader
+	 * @throws IOException
+	 */
+	public static InputStreamReader getInputStreamReader(String fileName) throws IOException
+	{
+		if (fileName.startsWith("hdfs:"))
+		{
+			Path pt=new Path(fileName);
+			FileSystem fs = FileSystem.get(new Configuration());
+			return new InputStreamReader(fs.open(pt));
+		}
+		return new FileReader(fileName);
+
+	}
+	/**
+	 * Get a BufferedReader for a file. If it is prefixed with "hdfs:", it will be located in HDFS.
+	 * @param fileName - full path name of HDFS file
+	 * @return BufferedReader
+	 * @throws IOException
+	 */
+	public static BufferedReader getBufferedReader(String fileName) throws IOException
+	{
+		return new BufferedReader(getInputStreamReader(fileName));
+	}
+	/**
+	 * Read a file into a HashSet. The file is assumed to have no header and a single record per line.
+	 * @param fileName - fully qualified file name
+	 * @return HashSet<String>
+	 * @throws Exception
+	 */
+	public static HashSet<String> getDictionary(String fileName) 
+			throws Exception
+			{
+		HashSet<String> fileMap = new HashSet<String>();
+		BufferedReader reader= getBufferedReader(fileName);
+
+		while (reader.ready())
+		{
+			String line = reader.readLine().trim();
+			fileMap.add(line);
+		}
+		reader.close();
+		return fileMap;
+			}
+	/**
+	 * Create a Named Entity Model finder from a model (.bin) file
+	 * @param  fileName
+	 * @return TokenNameFinderModel
+	 * @throws IOException
+	 */
+	public static TokenNameFinderModel getNamedEntityModel(String fileName) throws IOException
+	{
+		InputStream modelInEntity = getInputStream(fileName); 
+		TokenNameFinderModel modelEntity = new TokenNameFinderModel(modelInEntity); 
+		modelInEntity.close(); 
+		return modelEntity;
+	}
+
+	/**
+	 * Detect a Named Entity based on a model
+	 * @param  model, tokens, docNmar
+	 * @return List<NamedEntity>
+	 * @throws IOException
+	 */
+	public static List<NamedEntity> detectNamedEntity (TokenNameFinderModel model, String[] tokens, String docName, String entityType) throws IOException { 
+
+		TokenNameFinder nameFinder = new NameFinderME(model); 
+		List<NamedEntity> NamedEntityArr= new ArrayList<NamedEntity>() ;
+
+		Span nameSpans[] = nameFinder.find(tokens); 
+
+
+		for (Span span: nameSpans) { 
+			String name = ""; 
+			for (int i=span.getStart(); i<span.getEnd(); ++i) 
+				name +=" "+ tokens[i];  
+
+			NamedEntity entityName =new NamedEntity(); 
+
+			entityName.setName(name.trim()); 
+			entityName.setDoc(docName);
+			entityName.setType(entityType);
+			// System.out.println( personName.getName());
+			NamedEntityArr.add(entityName);
+
+		} 
+		return (NamedEntityArr)  ;   
+	}
+
+	// overloading to keep other code working
+	public static List<NamedEntity> detectNamedEntity (TokenNameFinderModel model, String[] tokens, String docName) throws IOException { 
+
+		TokenNameFinder nameFinder = new NameFinderME(model); 
+		List<NamedEntity> NamedEntityArr= new ArrayList<NamedEntity>() ;
+
+		Span nameSpans[] = nameFinder.find(tokens); 
+
+
+		for (Span span: nameSpans) { 
+			String name = ""; 
+			for (int i=span.getStart(); i<span.getEnd(); ++i) 
+				name +=" "+ tokens[i];  
+
+			NamedEntity entityName =new NamedEntity(); 
+
+			entityName.setName(name.trim()); 
+			entityName.setDoc(docName);
+
+			// System.out.println( personName.getName());
+			NamedEntityArr.add(entityName);
+
+		} 
+		return (NamedEntityArr)  ;   
+	}
+	/**
+	 * Detect a Named Entity based on a dictionary
+	 * @param  dictionary, tokens, docNmae
+	 * @return List<NamedEntity>
+	 * @throws IOException
+	 */
+	public static List<NamedEntity> detectDictionary (HashSet<String> dictionary, String[] tokens, String docName, String entityType) throws IOException { 
+
+		List<NamedEntity> NamedEntityArr= new ArrayList<NamedEntity>() ;
+
+		for (String token: tokens) { 
+
+			if (dictionary.contains(token.toUpperCase()))
+			{  
+				NamedEntity entityName =new NamedEntity(); 
+
+				entityName.setName(token.trim()); 
+				entityName.setDoc(docName);
+				entityName.setType(entityType);
+				//System.out.println( entityName.getName());
+				NamedEntityArr.add(entityName);
+
+			} 
+		}
+		return (NamedEntityArr)  ;   
+	}
+
+	/* overloading to keep other code working */
+	public static List<NamedEntity> detectDictionary (HashSet<String> dictionary, String[] tokens, String docName) throws IOException { 
+
+		List<NamedEntity> NamedEntityArr= new ArrayList<NamedEntity>() ;
+
+		for (String token: tokens) { 
+
+			if (dictionary.contains(token.toUpperCase()))
+			{  
+				NamedEntity entityName =new NamedEntity(); 
+
+				entityName.setName(token.trim()); 
+				entityName.setDoc(docName);
+
+				//System.out.println( entityName.getName());
+				NamedEntityArr.add(entityName);
+
+			} 
+		}
+		return (NamedEntityArr)  ;   
+	}
+
+	public static String namedEntityType(String token)
+	{
+		if ((token==null)||(token.equals(""))||(token==""))
+			return null;
+		else
+		{
+
+			token = token.toUpperCase();
+			if (compounds.contains(token))
+				return "compound";
+			if (elements.contains(token))
+				return "element";
+		}
+		return null;		
+	}
+
+	private static void loadTestData() {
+		compounds.add("ACETALDEHYDE");
+		compounds.add("ACETONE");
+		compounds.add("CELLULOSE");
+		compounds.add("CYANAMIDE");
+		compounds.add("DIAZINON ");
+		compounds.add("DICHLOROACETYLENE");
+		compounds.add("ENDOSULFAN");
+		compounds.add("GASOLINE");
+		compounds.add("METRIBUZIN");
+		compounds.add("NITROTOLUENE");
+		compounds.add("OCTANE");
+		compounds.add("OZONE");
+		compounds.add("PHOSPHINE");
+		compounds.add("OZONE");
+		compounds.add("PROPOXUR");
+		compounds.add("STYRENE");
+		compounds.add("TOLUENE");
+		compounds.add("TRIMETHYLAMINE");
+		compounds.add("XYLIDINE");
+		elements.add("HYDROGEN");
+		elements.add("OXYGEN");
+		elements.add("CHLORINE");
+		elements.add("ARGON");
+		elements.add("NEON");
+		elements.add("NITROGEN");
+		elements.add("KRYPTON");
+		elements.add("XENON");
+		elements.add("RADON");
+		elements.add("FLUORINE");
+		abbrevs.add("MR");
+		abbrevs.add("MRS");
+		abbrevs.add("MS");
+		abbrevs.add("DR");
+		abbrevs.add("PHD");
+		abbrevs.add("ST");
+		abbrevs.add("AVE");
+		abbrevs.add("RD");
+	}
+	/**
+	 * Parse text into sentences
+	 * @param text - document text
+	 * @return String[]
+	 */
+	public static String[] getSentences(String text)
+	{
+		String sentences[]=text.split("[.?!]");
+		for (int i=0; i< sentences.length; i++)
+		{
+			sentences[i]=sentences[i].trim();
+		}
+		return sentences;
+	}
+	/**
+	 * Parse a sentence into tokens
+	 * @param sentence - sentence
+	 * @return String[]
+	 */
+	public static String[] getTokens(String sentence)
+	{
+		return sentence.split("[ ,;:]+");
+	}
+
+	/**
+	 * Is this token an abbreviation? Thre token is lower cased. It is assumed to have been stripped 
+	 * of punctuation and white space. 
+	 * @param abbrev - token text
+	 * @return true or false
+	 */
+	public static boolean isAbbreviation(String token)
+	{
+		token = token.toUpperCase();
+		if (abbrevs.contains(token))
+			return true;
+		return false;		
+	}
+}
+

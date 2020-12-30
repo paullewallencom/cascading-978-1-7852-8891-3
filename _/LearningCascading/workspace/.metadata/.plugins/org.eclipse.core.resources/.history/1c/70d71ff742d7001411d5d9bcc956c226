@@ -1,0 +1,4 @@
+Test1.txt	0	This is a sample text
+Test1.txt	1	It can have many sentences
+Text2.txt	0	This text can have ambiguous sentences, including names like Mr
+Text2.txt	1	Smith

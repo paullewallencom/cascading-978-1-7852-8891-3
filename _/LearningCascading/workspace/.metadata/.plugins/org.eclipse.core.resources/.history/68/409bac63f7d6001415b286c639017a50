@@ -1,0 +1,4 @@
+#!/bin/bash
+. setenv.sh
+hadoop jar lib/learning_cascading.jar com.ai.learning.jobs.hadoop.$1 $2 $3 $4 $5
+

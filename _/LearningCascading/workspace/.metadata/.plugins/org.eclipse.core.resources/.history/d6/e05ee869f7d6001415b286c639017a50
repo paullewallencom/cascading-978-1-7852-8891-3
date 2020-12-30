@@ -1,0 +1,4 @@
+#!/bin/bash
+. setenv.sh
+hadoop jar lib/learning_cascading_$1.jar  $2 $3 $4 $5
+

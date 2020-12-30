@@ -1,0 +1,13 @@
+digraph G {
+  1 [label = "Every('RelationshipPipe')[RelationshipBuffer[decl:[{6}:'documentname', 'sentnumber', 'word1', 'type1', 'word2', 'type2']][args:4]]"];
+  2 [label = "FileTap['TextDelimited[['documentname', 'sentnumber', 'word1', 'type1', 'word2', 'type2']]']['output/IntegrationTestRel.txt']"];
+  3 [label = "GroupBy('RelationshipPipe')[by:['documentname', 'sentnumber']]"];
+  4 [label = "FileTap['TextDelimited[['documentname', 'sentnumber', 'word', 'type']]']['output/IntegrationTestNames.txt']"];
+  5 [label = "[head]\n2.6.3\nlocal:2.6.3:Concurrent, Inc."];
+  6 [label = "[tail]"];
+  1 -> 2 [label = "[{6}:'documentname', 'sentnumber', 'word1', 'type1', 'word2', 'type2']\n[{4}:'documentname', 'sentnumber', 'word', 'type']"];
+  3 -> 1 [label = "RelationshipPipe[{2}:'documentname', 'sentnumber']\n[{4}:'documentname', 'sentnumber', 'word', 'type']"];
+  5 -> 4 [label = ""];
+  2 -> 6 [label = "[{6}:'documentname', 'sentnumber', 'word1', 'type1', 'word2', 'type2']\n[{6}:'documentname', 'sentnumber', 'word1', 'type1', 'word2', 'type2']"];
+  4 -> 3 [label = "[{4}:'documentname', 'sentnumber', 'word', 'type']\n[{4}:'documentname', 'sentnumber', 'word', 'type']"];
+}

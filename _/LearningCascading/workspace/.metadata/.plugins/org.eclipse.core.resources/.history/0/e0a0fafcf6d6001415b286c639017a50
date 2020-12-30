@@ -1,0 +1,3 @@
+#!/bin/bash
+export HDFS_HOME=/user/$USER
+export LOCAL_HOME=/home/$USER

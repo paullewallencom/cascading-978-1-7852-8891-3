@@ -1,0 +1,34 @@
+documentname	sentnumber	word1	type1	word2	type2
+BAAA.pdf	0	BAAA Company	organization	ACME Company	organization
+BAAA.pdf	0	BAAA Company	organization	Mario Jones	person
+BAAA.pdf	0	ACME Company	organization	Mario Jones	person
+BAAA.pdf	1	Summercorp Inc	organization	Mario Jones	person
+BAAA.pdf	3	Summercorp Inc	organization	John Smith	person
+BAAA.pdf	4	Aluminum	chemical	Argon	chemical
+BAAA.pdf	4	Aluminum	chemical	Mario Jones	person
+BAAA.pdf	4	Argon	chemical	Mario Jones	person
+BCI.pdf	2	Chemical Industries	organization	gold	chemical
+BCI.pdf	2	Chemical Industries	organization	silver	chemical
+BCI.pdf	2	Chemical Industries	organization	Joan Brown	person
+BCI.pdf	2	gold	chemical	silver	chemical
+BCI.pdf	2	gold	chemical	Joan Brown	person
+BCI.pdf	2	silver	chemical	Joan Brown	person
+NEWS.pdf	3	zinc	chemical	sodium	chemical
+NEWS.pdf	3	zinc	chemical	silver	chemical
+NEWS.pdf	3	zinc	chemical	arsenic	chemical
+NEWS.pdf	3	sodium	chemical	silver	chemical
+NEWS.pdf	3	sodium	chemical	arsenic	chemical
+NEWS.pdf	3	silver	chemical	arsenic	chemical
+NEWS.pdf	4	gold	chemical	John Smith	person
+NEWS.pdf	4	gold	chemical	Joan Brown	person
+NEWS.pdf	4	John Smith	person	Joan Brown	person
+NEWS2.doc	0	Chemical Business Technology	organization	Chemical Industry	organization
+NEWS2.doc	0	Chemical Business Technology	organization	oxygen	chemical
+NEWS2.doc	0	Chemical Business Technology	organization	Steven Bergen	person
+NEWS2.doc	0	Chemical Industry	organization	oxygen	chemical
+NEWS2.doc	0	Chemical Industry	organization	Steven Bergen	person
+NEWS2.doc	0	oxygen	chemical	Steven Bergen	person
+NEWS2.doc	1	carbon	chemical	oxygen	chemical
+NEWS3.txt	0	House	organization	Environmental Protection Agency's	organization
+NEWS3.txt	0	House	organization	Michael Evans	person
+NEWS3.txt	0	Environmental Protection Agency's	organization	Michael Evans	person

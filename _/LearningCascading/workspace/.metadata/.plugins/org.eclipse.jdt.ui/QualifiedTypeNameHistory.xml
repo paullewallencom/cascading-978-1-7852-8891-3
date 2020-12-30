@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="cascading.operation.AssertionLevel"/>
+<fullyQualifiedTypeName name="cascading.operation.assertion.AssertSizeEquals"/>
+<fullyQualifiedTypeName name="cascading.operation.assertion.AssertEquals"/>
+<fullyQualifiedTypeName name="com.ai.learning.NamedEntityExtractor"/>
+<fullyQualifiedTypeName name="cascading.tap.hadoop.Hfs"/>
+</qualifiedTypeNameHistroy>

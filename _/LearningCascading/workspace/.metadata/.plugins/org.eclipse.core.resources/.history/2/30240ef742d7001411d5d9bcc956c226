@@ -1,0 +1,41 @@
+BAAA.pdf	0	Mario Jones	person	BAAA Company	organization
+BAAA.pdf	0	Mario Jones	person	ACME Company	organization
+BAAA.pdf	0	BAAA Company	organization	ACME Company	organization
+BAAA.pdf	1	Mario Jones	person	John Smith	person
+BAAA.pdf	1	Mario Jones	person	Summercorp Inc He	organization
+BAAA.pdf	1	John Smith	person	Summercorp Inc He	organization
+BAAA.pdf	2	John Smith	person	Mario Jones	person
+BAAA.pdf	2	John Smith	person	Aluminum	chemical
+BAAA.pdf	2	John Smith	person	Argon	chemical
+BAAA.pdf	2	John Smith	person	Summercorp Inc Mario	organization
+BAAA.pdf	2	Mario Jones	person	Aluminum	chemical
+BAAA.pdf	2	Mario Jones	person	Argon	chemical
+BAAA.pdf	2	Mario Jones	person	Summercorp Inc Mario	organization
+BAAA.pdf	2	Aluminum	chemical	Argon	chemical
+BAAA.pdf	2	Aluminum	chemical	Summercorp Inc Mario	organization
+BAAA.pdf	2	Argon	chemical	Summercorp Inc Mario	organization
+BCI.pdf	2	Joan Brown	person	gold	chemical
+BCI.pdf	2	Joan Brown	person	silver	chemical
+BCI.pdf	2	Joan Brown	person	Chemical Industries	organization
+BCI.pdf	2	gold	chemical	silver	chemical
+BCI.pdf	2	gold	chemical	Chemical Industries	organization
+BCI.pdf	2	silver	chemical	Chemical Industries	organization
+NEWS.pdf	3	zinc	chemical	sodium	chemical
+NEWS.pdf	3	zinc	chemical	silver	chemical
+NEWS.pdf	3	zinc	chemical	arsenic	chemical
+NEWS.pdf	3	sodium	chemical	silver	chemical
+NEWS.pdf	3	sodium	chemical	arsenic	chemical
+NEWS.pdf	3	silver	chemical	arsenic	chemical
+NEWS.pdf	4	John Smith	person	Joan Brown	person
+NEWS.pdf	4	John Smith	person	gold	chemical
+NEWS.pdf	4	Joan Brown	person	gold	chemical
+NEWS2.doc	0	Steven Bergen	person	oxygen	chemical
+NEWS2.doc	0	Steven Bergen	person	Chemical Business Technology	organization
+NEWS2.doc	0	Steven Bergen	person	Chemical Industry	organization
+NEWS2.doc	0	oxygen	chemical	Chemical Business Technology	organization
+NEWS2.doc	0	oxygen	chemical	Chemical Industry	organization
+NEWS2.doc	0	Chemical Business Technology	organization	Chemical Industry	organization
+NEWS2.doc	1	carbon	chemical	oxygen	chemical
+NEWS3.txt	0	Michael Evans	person	House	organization
+NEWS3.txt	0	Michael Evans	person	Environmental Protection Agency's	organization
+NEWS3.txt	0	House	organization	Environmental Protection Agency's	organization
